@@ -3,55 +3,77 @@
 
 <body>
     <h2>Fat dog</h2>
-    <canvas id="canvas"></canvas>
+    <canvas id="canvas"><!--
+    --></canvas><canvas id="canvas2"></canvas>
 
     <script>
-        // place empty canvas
-        var c = document.getElementById("canvas");
-        const ctx = canvas.getContext("2d");
+        function draw(placeholder = "", file = "") {
+            // place empty canvas
+            var c = document.getElementById(placeholder);
+            c.style.display = 'block'
+            const ctx = c.getContext("2d");
 
-        // define image dimensions
-        var w = 300; // width
-        var h = 226; // height
-        const image = new Image(w, h);
+            // define image dimensions
+            const image = new Image();
+            var w = 0;
+            var h = 0;
+            image.addEventListener('load', function () {
+                // once the image is loaded:
+                w = image.naturalWidth; // this will be 980
+                h = image.naturalHeight; // this will be 350
+            }, false);
 
-        // draw when image loads
-        image.onload = drawImageActualSize;
-        image.src = "eggs.png";
+            // draw when image loads
+            image.onload = drawImageActualSize;
+            image.src = file;
 
 
-        function drawImageActualSize() {
-            c.width = w; // this.naturalWidth;
-            c.height = h; // this.naturalHeight;
+            function drawImageActualSize() {
+                c.width = w; // this.naturalWidth;
+                c.height = h; // this.naturalHeight;
 
-            wPL = w / 2; // width panel length
-            hPL = h / 2; // height panel length
+                wPL = w / 2; // width panel length
+                hPL = h / 2; // height panel length
 
-            // top left panel loc
-            const TLPW = 0;
-            const TLPH = 0;
+                // top left panel loc
+                const TLPW = 0;
+                const TLPH = 0;
 
-            // top right panel loc
-            const TRPW = wPL;
-            const TRPH = 0;
+                // top right panel loc
+                const TRPW = wPL;
+                const TRPH = 0;
 
-            // bottom left panel loc
-            const BLPW = 0;
-            const BLPH = hPL;
+                // bottom left panel loc
+                const BLPW = 0;
+                const BLPH = hPL;
 
-            // bottom right panel loc
-            const BRPW = wPL;
-            const BRPH = hPL;
+                // bottom right panel loc
+                const BRPW = wPL;
+                const BRPH = hPL;
 
-            // draw top left panel where BRP was
-            ctx.drawImage(image, 0, 0, wPL, hPL, BRPW, BRPH, wPL, hPL);
-            // draw top right panel where BLP was
-            ctx.drawImage(image, wPL, 0, wPL, hPL, BLPW, BLPH, wPL, hPL);
-            // draw bottom left panel where TRP was
-            ctx.drawImage(image, 0, hPL, wPL, hPL, TRPW, TRPH, wPL, hPL);
-            // draw bottom right panel where TLP was
-            ctx.drawImage(image, wPL, hPL, wPL, hPL, TLPW, TLPH, wPL, hPL);
+                // draw top left panel where BRP was
+                ctx.drawImage(image, 0, 0, wPL, hPL, BRPW, BRPH, wPL, hPL);
+                // draw top right panel where BLP was
+                ctx.drawImage(image, wPL, 0, wPL, hPL, BLPW, BLPH, wPL, hPL);
+                // draw bottom left panel where TRP was
+                ctx.drawImage(image, 0, hPL, wPL, hPL, TRPW, TRPH, wPL, hPL);
+                // draw bottom right panel where TLP was
+                ctx.drawImage(image, wPL, hPL, wPL, hPL, TLPW, TLPH, wPL, hPL);
+                // do it again for double opacity
+                // draw top left panel where BRP was
+                ctx.drawImage(image, 0, 0, wPL, hPL, BRPW, BRPH, wPL, hPL);
+                // draw top right panel where BLP was
+                ctx.drawImage(image, wPL, 0, wPL, hPL, BLPW, BLPH, wPL, hPL);
+                // draw bottom left panel where TRP was
+                ctx.drawImage(image, 0, hPL, wPL, hPL, TRPW, TRPH, wPL, hPL);
+                // draw bottom right panel where TLP was
+                ctx.drawImage(image, wPL, hPL, wPL, hPL, TLPW, TLPH, wPL, hPL);
+            }
         }
+
+        draw("canvas","eggs.png");
+        draw("canvas2","eggs2.png");
     </script>
 </body>
+
 </html>

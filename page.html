@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h2>Fat dog</h2>
+    <canvas id="canvas"></canvas>
+
+    <script>
+        // place empty canvas
+        var c = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+
+        // define image dimensions
+        var w = 300; // width
+        var h = 226; // height
+        const image = new Image(w, h);
+
+        // draw when image loads
+        image.onload = drawImageActualSize;
+        image.src = "eggs.png";
+
+
+        function drawImageActualSize() {
+            c.width = w; // this.naturalWidth;
+            c.height = h; // this.naturalHeight;
+
+            wPL = w / 2; // width panel length
+            hPL = h / 2; // height panel length
+
+            // top left panel loc
+            const TLPW = 0;
+            const TLPH = 0;
+
+            // top right panel loc
+            const TRPW = wPL;
+            const TRPH = 0;
+
+            // bottom left panel loc
+            const BLPW = 0;
+            const BLPH = hPL;
+
+            // bottom right panel loc
+            const BRPW = wPL;
+            const BRPH = hPL;
+
+            // draw top left panel where BRP was
+            ctx.drawImage(image, 0, 0, wPL, hPL, BRPW, BRPH, wPL, hPL);
+            // draw top right panel where BLP was
+            ctx.drawImage(image, wPL, 0, wPL, hPL, BLPW, BLPH, wPL, hPL);
+            // draw bottom left panel where TRP was
+            ctx.drawImage(image, 0, hPL, wPL, hPL, TRPW, TRPH, wPL, hPL);
+            // draw bottom right panel where TLP was
+            ctx.drawImage(image, wPL, hPL, wPL, hPL, TLPW, TLPH, wPL, hPL);
+        }
+    </script>
+</body>
+</html>
